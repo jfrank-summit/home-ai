@@ -1,5 +1,7 @@
 # Project-specific rules for AI assistance
 
+# We're using Yarn, TypeScript, and a functional, modular style
+
 # Package manager
 use_yarn: true
 
@@ -58,3 +60,4 @@ use_conventional_commits: true
 run_linter: true
 linter: eslint
 
+# Remember, this is a monorepo project with packages for AI agents, backend, frontend, and shared code. Keep it clean and modular!
