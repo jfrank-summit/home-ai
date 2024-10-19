@@ -1,0 +1,22 @@
+{
+    "name": "ai-powered-smart-home",
+    "version": "1.0.0",
+    "private": true,
+    "workspaces": [
+        "packages/*",
+        "shared"
+    ],
+    "scripts": {
+        "start": "yarn workspace @ai-project/ai-agents start",
+        "dev": "yarn workspace @ai-project/ai-agents dev",
+        "build": "yarn workspaces run build",
+        "test": "yarn workspaces run test",
+        "lint": "yarn workspaces run lint"
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^5.0.0",
+        "@typescript-eslint/parser": "^5.0.0",
+        "eslint": "^8.0.0",
+        "typescript": "^4.5.0"
+    }
+}
