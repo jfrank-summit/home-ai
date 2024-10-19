@@ -1,0 +1,60 @@
+# Project-specific rules for AI assistance
+
+# Package manager
+use_yarn: true
+
+# Language and style
+language: typescript
+coding_style: functional
+architecture: modular
+
+# TypeScript-specific rules
+prefer_const: true
+use_strict_null_checks: true
+use_interfaces_over_types: true
+
+# Naming conventions
+use_camelCase_for_variables: true
+use_PascalCase_for_types_and_interfaces: true
+use_UPPER_CASE_for_constants: true
+
+# Code organization
+prefer_named_exports: true
+group_imports: true
+
+# Testing
+testing_framework: jest
+write_unit_tests: true
+
+# Documentation
+use_jsdoc_comments: true
+document_public_apis: true
+
+# Error handling
+use_try_catch: true
+prefer_async_await: true
+
+# Formatting
+max_line_length: 100
+use_semicolons: true
+indent_size: 2
+quote_style: single
+
+# Libraries and frameworks
+preferred_ui_framework: react
+preferred_state_management: redux
+
+# Performance
+avoid_any: true
+use_memoization: true
+
+# Accessibility
+ensure_a11y_compliance: true
+
+# Version control
+use_conventional_commits: true
+
+# Code quality
+run_linter: true
+linter: eslint
+
