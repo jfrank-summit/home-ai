@@ -1,13 +1,35 @@
 import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import assistantRoutes from './routes/assistantRoutes';
+import logger from './logger';
+
+// Load environment variables
+dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
-app.get('/hello/:name/:age', (req, res) => {
-    const { name, age } = req.params;
-    res.send(`Hello ${name} from AI Agents! You are ${age} years old.`);
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// Routes
+app.use('/api/assistant', assistantRoutes);
+
+// Error handling middleware
+app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    logger.error('Server Error:', err);
+    res.status(500).json({
+        success: false,
+        error: 'Internal Server Error',
+        message: process.env.NODE_ENV === 'development' ? err.message : undefined,
+    });
 });
 
-app.listen(port, () => {
-    console.log(`AI Agents server listening at http://localhost:${port}`);
+// Start server
+app.listen(PORT, () => {
+    logger.info(`Server is running on port ${PORT}`);
 });
+
+export default app;

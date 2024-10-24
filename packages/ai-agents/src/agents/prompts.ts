@@ -26,7 +26,6 @@ export const assistantPrompt = ChatPromptTemplate.fromMessages([
   new MessagesPlaceholder('messages'),
 ]);
 
-
 export const researchDecisionPrompt = ChatPromptTemplate.fromMessages([
   [
     'system',

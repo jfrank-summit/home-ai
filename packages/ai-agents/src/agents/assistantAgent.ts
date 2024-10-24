@@ -32,10 +32,12 @@ const State = Annotation.Root({
 
 const assistantNode = async (state: typeof State.State) => {
     logger.info('Assistant Node - Starting assistant process');
-    const response = await assistantChain.invoke({ messages: state.messages });
-    logger.info('Assistant Node - Assistant process completed');
+    const response = await assistantChain.invoke({
+        messages: state.messages.map(msg => msg.content).join('\n')
+    });
+    logger.info('Assistant Node - Assistant process completed', { response });
     return {
-        messages: [new AIMessage(response.response)],
+        messages: [new AIMessage({ content: response.response })],
         output: response,
     };
 };
@@ -53,23 +55,31 @@ export const assistantAgent = async ({
 }: AssistantAgentParams): Promise<AssistantAgentOutput> => {
     logger.info('AssistantAgent - Starting assistant process', { userRequest });
 
-    // Initialize state with channels
     const initialState = {
-        messages: [new HumanMessage(userRequest)],
+        messages: [new HumanMessage({ content: userRequest })],
+        channels: {},
     };
 
     logger.info('AssistantAgent - Initial state prepared');
 
     const result = await app.invoke(initialState);
 
-    if (!result.output) {
-        logger.error('AssistantAgent - No output was generated');
+    logger.info('AssistantAgent - Result received', { result });
+
+    // Check for messages in the result
+    const lastMessage = result.messages?.[result.messages.length - 1];
+    if (!lastMessage || !lastMessage.content) {
+        logger.error('AssistantAgent - No valid message found', { result });
         throw new Error('Failed to generate assistant response');
     }
 
     logger.info('AssistantAgent - Assistant process completed');
+
+    // Parse the response and create follow-up questions
+    const response = lastMessage.content.toString();
+
+
     return {
-        response: result.output.response,
-        followUpQuestions: result.output.followUpQuestions,
+        response,
     };
 };
