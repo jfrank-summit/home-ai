@@ -11,10 +11,11 @@ import logger from '../logger';
 dotenv.config();
 
 const MODEL = 'gpt-4o-mini';
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
 // Configure the assistant LLM with structured output
 const assistantLlm = new ChatOpenAI({
-    openAIApiKey: process.env.OPENAI_API_KEY,
+    openAIApiKey: OPENAI_API_KEY,
     model: MODEL,
     temperature: 0.7,
     maxTokens: 2000,
@@ -23,10 +24,12 @@ const assistantLlm = new ChatOpenAI({
 // Create the assistant chain
 const assistantChain = assistantPrompt.pipe(assistantLlm);
 
-// Define the state using Annotation.Root
 const State = Annotation.Root({
     messages: Annotation<BaseMessage[]>({
         reducer: (x, y) => x.concat(y),
+    }),
+    followUpQuestions: Annotation<string[]>({
+        reducer: (x, y) => [...new Set([...x, ...y])], // Ensure unique questions
     }),
 });
 
@@ -38,6 +41,7 @@ const assistantNode = async (state: typeof State.State) => {
     logger.info('Assistant Node - Assistant process completed', { response });
     return {
         messages: [new AIMessage({ content: response.response })],
+        followUpQuestions: response.followUpQuestions || [],
         output: response,
     };
 };
@@ -57,6 +61,7 @@ export const assistantAgent = async ({
 
     const initialState = {
         messages: [new HumanMessage({ content: userRequest })],
+        followUpQuestions: [],
         channels: {},
     };
 
@@ -81,5 +86,6 @@ export const assistantAgent = async ({
 
     return {
         response,
+        followUpQuestions: result.followUpQuestions || [],
     };
 };

@@ -4,4 +4,5 @@ export interface AssistantAgentParams {
 
 export interface AssistantAgentOutput {
     response: string;
+    followUpQuestions: string[];
 }

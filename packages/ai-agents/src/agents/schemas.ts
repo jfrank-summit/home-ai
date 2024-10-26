@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const assistantSchema = z.object({
     response: z.string(),
-    followUpQuestions: z.array(z.string()),
+    followUpQuestions: z.array(z.string()).optional(),
 });
 
 export const researchDecisionSchema = z.object({
