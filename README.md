@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is an experimental project aimed at building an AI-powered smart home system. The project explores the integration of artificial intelligence with home automation technologies to create a more intuitive, efficient, and adaptive living environment.
+This is an experimental project aimed at building an AI-powered smart home system. Born from a father-son collaboration, this project combines the excitement of teaching and learning with the goal of creating practical AI applications. The project explores the integration of artificial intelligence with home automation technologies to create a more intuitive, efficient, and adaptive living environment.
 
 ## Project Goals
 
@@ -10,6 +10,7 @@ This is an experimental project aimed at building an AI-powered smart home syste
 - Create a seamless integration between various smart home devices and AI decision-making systems
 - Explore novel ways of human-AI interaction in a home setting
 - Enhance energy efficiency and comfort through intelligent automation
+- Foster learning and collaboration through hands-on development experience
 
 ## Project Structure
 
@@ -34,7 +35,7 @@ This project is set up as a monorepo with the following packages:
 
 ## Current Status
 
-This project is in its early experimental stages. Features and APIs are subject to frequent changes as we explore different approaches and technologies.
+This project is in its early experimental stages. Features and APIs are subject to frequent changes as we explore different approaches and technologies. We're learning and building together, combining industry experience with fresh perspectives.
 
 ## Contributing
 
